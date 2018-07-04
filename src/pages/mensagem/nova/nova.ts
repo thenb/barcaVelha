@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController,  } from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
+import { ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the Tab2Page page.
@@ -15,13 +16,51 @@ import { HttpClient} from '@angular/common/http';
 })
 export class NovaPage {
 
-  nova: any;
+  private mensagem= {
+    on_fire : false,
+    data_evento: '',
+    data_criacao: Date.now(),
+    descricao: ''
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, public loadingController: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    private http: HttpClient, public loadingController: LoadingController,
+    private toastCtrl: ToastController) {
   }
 
   cancelar() {  
     this.navCtrl.setRoot('MenuPage');
   }
   
+  enviarMensagem(){
+
+    this.http.post('https://barcavelha.herokuapp.com/newMsg', this.mensagem, 
+    {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .toPromise().then(data => {
+      this.presentToast(data);
+      console.log(data);
+    }).catch(error => {
+      console.log(error.status);
+    });
+  }
+
+
+  presentToast(data) {
+    
+    let toast = this.toastCtrl.create({
+      message: JSON.stringify(data),
+      duration: 3000,
+      position: 'top'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+  
+    toast.present();
+  }
+
+
 }
