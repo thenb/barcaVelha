@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
+import { CONFIG } from '../../config/config_global';
 
 /**
  * Generated class for the News page.
@@ -15,10 +16,22 @@ import { HttpClient} from '@angular/common/http';
 })
 export class MensagensPage {
 
+  msgs: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, public loadingController: LoadingController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Mensagens Page');
+    let loader = this.loadingController.create({
+      content: "Carregando"
+    });  
+    this.http.get(CONFIG.url_api+'getAllMsgs')
+      // Call map on the response observable to get the parsed people object
+      .toPromise().then(
+        data => {
+          this.msgs = data;
+          loader.dismiss();
+        }
+      );
   }
 }

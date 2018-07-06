@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController,  } from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
 import { ToastController } from 'ionic-angular';
+import { CONFIG } from '../../../config/config_global';
 
 /**
  * Generated class for the Tab2Page page.
@@ -23,10 +24,14 @@ export class NovaPage {
     descricao: ''
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    private http: HttpClient, public loadingController: LoadingController,
-    private toastCtrl: ToastController) {
-  }
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams, 
+    private http: HttpClient,
+    public loadingController: LoadingController,
+    private toastCtrl: ToastController) 
+    {
+
+    }
 
   cancelar() {  
     this.navCtrl.setRoot('MenuPage');
@@ -34,7 +39,7 @@ export class NovaPage {
   
   enviarMensagem(){
 
-    this.http.post('https://barcavelha.herokuapp.com/newMsg', this.mensagem, 
+    this.http.post(CONFIG.url_api+'newMsg', this.mensagem, 
     {
       headers: { 'Content-Type': 'application/json' }
     })

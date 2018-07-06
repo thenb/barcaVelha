@@ -21,5 +21,6 @@
           <ion-textarea class="textarea" name="descricao" [(ngModel)]="mensagem.descricao" ></ion-textarea>
         </ion-item>
         <button ion-button type="submit" block>Enviar</button>
+        <button ion-button (click)="cancelar()" block>Cancelar</button>
     </form>
 </ion-content>
