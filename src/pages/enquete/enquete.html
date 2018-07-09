@@ -7,38 +7,38 @@
   </ion-navbar>
 </ion-header>
 <ion-content> 
-  <form (ngSubmit)="criarEnquete()">
+  <form [formGroup]="enquete" (ngSubmit)="criarEnquete()">
     <ion-item>
       <ion-label stacked>Título da enquete</ion-label>
-      <ion-input [(ngModel)]="enquete.descricao" formControlName="descricao" required ></ion-input>
+      <ion-input formControlName="descricao"  required ></ion-input>
     </ion-item>
 
     <ion-item rows="1">
       <ion-label>Data e hora limite</ion-label>
-      <ion-datetime type="text" [(ngModel)]="enquete.data_fim" formControlName="title" displayFormat="DD/MM/YYYY - HH:mm" required></ion-datetime>
+      <ion-datetime formControlName="data_fim" type="text" displayFormat="DD/MM/YYYY - HH:mm" required></ion-datetime>
     </ion-item>
     
     <ion-item>
       <ion-label stacked>Opção 1</ion-label>
-      <ion-input [(ngModel)]="enquete.opcao_1" formControlName="opcao_1"></ion-input>
+      <ion-input formControlName="opcao_1"></ion-input>
     </ion-item>
       
     <ion-item>
       <ion-label stacked>Opção 2</ion-label>
-      <ion-input [(ngModel)]="enquete.opcao_2" name="opcao_2"></ion-input>
+      <ion-input formControlName="opcao_2"></ion-input>
      </ion-item>
       
     <ion-item>
       <ion-label stacked>Opção 3</ion-label>
-      <ion-input [(ngModel)]="enquete.opcao_3" name="opcao_3"></ion-input>
+      <ion-input formControlName="opcao_3"></ion-input>
     </ion-item>
       
     <ion-item>
       <ion-label stacked>Opção 4</ion-label>
-      <ion-input [(ngModel)]="enquete.opcao_4" name="opcao_4"></ion-input>
+      <ion-input formControlName="opcao_4"></ion-input>
     </ion-item>
 
-    <button ion-button type="submit" block>Enviar</button>
+    <button ion-button type="submit" [disabled]="!enquete.valid || verificarOpcoes()" block>Enviar</button>
 
   </form>
 </ion-content>
