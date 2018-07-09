@@ -7,5 +7,38 @@
   </ion-navbar>
 </ion-header>
 <ion-content> 
-    <button ion-button full outline (click)="cancelar()">Cancelar</button>
+  <form (ngSubmit)="criarEnquete()">
+    <ion-item>
+      <ion-label stacked>Título da enquete</ion-label>
+      <ion-input [(ngModel)]="enquete.descricao" name="descricao" ></ion-input>
+    </ion-item>
+
+    <ion-item rows="1">
+      <ion-label>Data e hora limite</ion-label>
+      <ion-datetime type="text" [(ngModel)]="enquete.data_fim" name="title" displayFormat="DD/MM/YYYY - HH:mm"></ion-datetime>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label stacked>Opção 1</ion-label>
+      <ion-input [(ngModel)]="enquete.opcao_1" name="opcao_1"></ion-input>
+    </ion-item>
+      
+    <ion-item>
+      <ion-label stacked>Opção 2</ion-label>
+      <ion-input [(ngModel)]="enquete.opcao_2" name="opcao_2"></ion-input>
+     </ion-item>
+      
+    <ion-item>
+      <ion-label stacked>Opção 3</ion-label>
+      <ion-input [(ngModel)]="enquete.opcao_3" name="opcao_3"></ion-input>
+    </ion-item>
+      
+    <ion-item>
+      <ion-label stacked>Opção 4</ion-label>
+      <ion-input [(ngModel)]="enquete.opcao_4" name="opcao_4"></ion-input>
+    </ion-item>
+
+    <button ion-button type="submit" block>Enviar</button>
+
+  </form>
 </ion-content>
