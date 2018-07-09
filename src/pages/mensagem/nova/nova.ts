@@ -44,7 +44,7 @@ export class NovaPage {
     })
     .toPromise().then(data => {
       this.presentToast(data);
-      console.log(data);
+      this.navCtrl.setRoot('MenuPage');
     }).catch(error => {
       console.log(error.status);
     });

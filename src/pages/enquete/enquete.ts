@@ -34,10 +34,6 @@ export class EnquetePage {
     private toastCtrl: ToastController) {
   }
 
-  cancelar() {  
-    this.navCtrl.setRoot('MenuPage');
-  }
-
   criarEnquete(){
     this.http.post(CONFIG.url_api+'newPoll', this.enquete, 
     {
@@ -45,7 +41,7 @@ export class EnquetePage {
     })
     .toPromise().then(data => {
       this.presentToast(data);
-      console.log(data);
+      this.navCtrl.setRoot('MenuPage');
     }).catch(error => {
       console.log(error.status);
     });
@@ -64,6 +60,10 @@ export class EnquetePage {
     });
   
     toast.present();
+  }
+
+  cancelar() {  
+    this.navCtrl.setRoot('MenuPage');
   }
 
 }

@@ -9,14 +9,16 @@
 <ion-content>  
   <ion-card *ngFor="let m of msgs">
     <img src="assets/imgs/rede_sociais/facebook.jpg" class="img-responsive " style=" width: 100% !important;height: auto !important;min-height: 150px;max-height: 170px;"/>
+    
     <ion-card-content>
-      <ion-card-title>Titulo <ion-icon ios="ios-bonfire" md="md-bonfire" *ngIf="m.on_fire" color="danger"></ion-icon>     </ion-card-title>
-      <p>{{m.descricao}}</p>  
-      <ion-item style="padding-left: 0px">
+      <ion-icon float-left ios="ios-flame" md="md-flame" *ngIf="m.on_fire" color="danger" style="zoom:3.0;"></ion-icon>  
+      <ion-icon float-right ios="ios-flame" md="md-flame" *ngIf="m.on_fire" color="danger" style="zoom:3.0;"></ion-icon>  
+      <ion-card-title text-center  >{{m.descricao}}</ion-card-title>
+      <ion-item style="padding-left: 0px" >
           <ion-label>Data do Evento: </ion-label>
-          <ion-datetime type="text" [(ngModel)]="m.data_evento" displayFormat="DD/MM/YYYY - HH:mm" [disabled]="true"></ion-datetime> 
-      </ion-item>       
-    </ion-card-content>
+          <ion-datetime  type="text" [(ngModel)]="m.data_evento" displayFormat="DD/MM/YYYY - HH:mm" [disabled]="true"></ion-datetime> 
+      </ion-item> 
+      </ion-card-content>
   </ion-card> 
 </ion-content>
   
