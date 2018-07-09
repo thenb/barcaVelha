@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content> 
-  <form [formGroup]="enquete" (ngSubmit)="criarEnquete()">
+  <form [formGroup]="enquete">
     <ion-item>
       <ion-label stacked>Título da enquete</ion-label>
       <ion-input formControlName="descricao"  required ></ion-input>
@@ -37,8 +37,11 @@
       <ion-label stacked>Opção 4</ion-label>
       <ion-input formControlName="opcao_4"></ion-input>
     </ion-item>
-
-    <button ion-button type="submit" block>Enviar</button>
-
   </form>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button (click)="criarEnquete()" block>Enviar</button>
+    <button ion-button (click)="cancelar()" block>Cancelar</button>
+  </ion-toolbar>
+</ion-footer>

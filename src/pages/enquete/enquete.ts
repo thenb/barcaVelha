@@ -34,10 +34,6 @@ export class EnquetePage {
       });
   }
 
-  cancelar() {  
-    this.navCtrl.setRoot('MenuPage');
-  }
-
   criarEnquete(){
 
     if(!this.enquete.valid){
@@ -51,7 +47,7 @@ export class EnquetePage {
       })
       .toPromise().then(data => {
         this.presentToast(data);
-        console.log(data);
+        this.navCtrl.setRoot('MenuPage');
       }).catch(error => {
         console.log(error.status);
       });
@@ -73,6 +69,10 @@ export class EnquetePage {
     });
   
     toast.present();
+  }
+
+  cancelar() {  
+    this.navCtrl.setRoot('MenuPage');
   }
 
   verificarOpcoes(){
