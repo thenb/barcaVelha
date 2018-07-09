@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "5.2.10",
     "@auth0/cordova": "^0.3.0",
     "@ionic-native/core": "4.7.0",
+    "@ionic-native/device": "^4.9.0",
     "@ionic-native/http": "^4.9.0",
     "@ionic-native/in-app-browser": "^4.9.0",
     "@ionic-native/photo-viewer": "^4.9.0",

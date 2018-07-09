@@ -8,6 +8,8 @@ import { MenuPage } from '../pages/menu/menu';
 import { MyApp } from './app.component';
 import {InAppBrowser } from '@ionic-native/in-app-browser'
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { Device } from '@ionic-native/device';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     HttpClientModule,
     InAppBrowser,
     PhotoViewer,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Device
   ]
 })
 export class AppModule {}

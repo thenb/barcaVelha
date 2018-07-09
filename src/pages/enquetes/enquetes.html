@@ -11,15 +11,29 @@
         <img src="assets/imgs/rede_sociais/facebook.jpg" class="img-responsive " style=" width: 100% !important;height: auto !important;min-height: 150px;max-height: 170px;"/>
         <ion-card-content>
           <ion-card-title>{{m.descricao}}</ion-card-title>
-          <ion-item>
-            <ion-label>Finaliza: </ion-label>
-            <ion-datetime type="text" [(ngModel)]="m.data_fim" displayFormat="DD/MM/YYYY - HH:mm" ng-disabled="true"></ion-datetime> 
-          </ion-item>     
-          <button ion-button block color="light">{{m.opcao_1}}</button>                         
-          <button ion-button block color="light">{{m.opcao_2}}</button> 
-          <button ion-button block color="light">{{m.opcao_3}}</button>   
-          <button ion-button block color="light">{{m.opcao_4}}</button> 
-          <button ion-button block>Votar</button>
+          <ion-item style="padding-left: 0px">
+            <ion-label>Enquete Finaliza: </ion-label>
+            <ion-datetime type="text" [(ngModel)]="m.data_fim" displayFormat="DD/MM/YYYY - HH:mm" [disabled]="true"></ion-datetime> 
+          </ion-item>
+          <ion-list radio-group [(ngModel)]="m.resposta"> 
+            <ion-item style="padding-left: 0px">
+              <ion-label>{{m.opcao_1}}</ion-label>
+              <ion-radio value="1"></ion-radio>
+            </ion-item>          
+            <ion-item style="padding-left: 0px">
+              <ion-label>{{m.opcao_2}}</ion-label>
+              <ion-radio value="2"></ion-radio>
+            </ion-item>          
+            <ion-item style="padding-left: 0px">
+              <ion-label>{{m.opcao_3}}</ion-label>
+              <ion-radio value="3"></ion-radio>
+            </ion-item>
+            <ion-item style="padding-left: 0px">
+              <ion-label>{{m.opcao_4}}</ion-label>
+              <ion-radio value="4"></ion-radio>
+            </ion-item>  
+          </ion-list>
+          <button ion-button block (click)="votar(m)">Votar</button>
         </ion-card-content>
       </ion-card> 
 </ion-content>

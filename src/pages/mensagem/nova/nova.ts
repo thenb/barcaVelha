@@ -38,7 +38,6 @@ export class NovaPage {
   }
   
   enviarMensagem(){
-
     this.http.post(CONFIG.url_api+'newMsg', this.mensagem, 
     {
       headers: { 'Content-Type': 'application/json' }

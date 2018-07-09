@@ -25,6 +25,7 @@ export class MensagensPage {
     let loader = this.loadingController.create({
       content: "Carregando"
     });  
+    loader.present();
     this.http.get(CONFIG.url_api+'getAllMsgs')
       // Call map on the response observable to get the parsed people object
       .toPromise().then(
