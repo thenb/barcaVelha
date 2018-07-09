@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController,  } from 'ionic-
 import { HttpClient} from '@angular/common/http';
 import { ToastController } from 'ionic-angular';
 import { CONFIG } from '../../../config/config_global';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CONTENT } from '../../../assets/content/content';
 
 /**
  * Generated class for the Tab2Page page.
@@ -17,19 +19,17 @@ import { CONFIG } from '../../../config/config_global';
 })
 export class NovaPage {
 
-  private mensagem= {
-    on_fire : false,
-    data_evento: '',
-    descricao: ''
-  };
+  private mensagem: FormGroup; 
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams, 
-    private http: HttpClient,
-    public loadingController: LoadingController,
-    private toastCtrl: ToastController) 
+  constructor(public navCtrl: NavController,  public navParams: NavParams, 
+    private http: HttpClient,  public loadingController: LoadingController,
+    private toastCtrl: ToastController,  private formBuilder: FormBuilder) 
     {
-
+      this.mensagem = this.formBuilder.group({
+        on_fire : [false],
+        data_evento: ['', Validators.required],
+        descricao: ['', Validators.required]
+      });
     }
 
   cancelar() {  
@@ -37,16 +37,25 @@ export class NovaPage {
   }
   
   enviarMensagem(){
-    this.http.post(CONFIG.url_api+'newMsg', this.mensagem, 
-    {
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .toPromise().then(data => {
-      this.presentToast(data);
-      console.log(data);
-    }).catch(error => {
-      console.log(error.status);
-    });
+
+
+    if(!this.mensagem.valid){
+      this.presentToast(CONTENT.Mensagem.erroCampoObrigatorio);
+    }else{
+      this.http.post(CONFIG.url_api+'newMsg', this.mensagem, 
+      {
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .toPromise().then(data => {
+        this.presentToast(data);
+        console.log(data);
+      }).catch(error => {
+        console.log(error.status);
+      });
+    }
+
+
+
   }
 
 

@@ -7,18 +7,18 @@
   </ion-navbar>
 </ion-header>
 <ion-content>  
-    <form (ngSubmit)="enviarMensagem()">
+    <form [formGroup]="mensagem"  (ngSubmit)="enviarMensagem()">
         <ion-item rows="1">
           <ion-label>Data e hora</ion-label>
-          <ion-datetime type="text" [(ngModel)]="mensagem.data_evento" name="title" displayFormat="DD/MM/YYYY - HH:mm"></ion-datetime>
+          <ion-datetime formControlName="data_evento" type="text" displayFormat="DD/MM/YYYY - HH:mm"></ion-datetime>
         </ion-item>
         <ion-item rows="1">
           <ion-label>On fire</ion-label>
-          <ion-checkbox [(ngModel)]="mensagem.on_fire" name="onFire"></ion-checkbox>
+          <ion-checkbox formControlName="on_fire" name="onFire"></ion-checkbox>
         </ion-item>
         <ion-item class="textarea">
           <ion-label>Mensagem</ion-label>
-          <ion-textarea class="textarea" name="descricao" [(ngModel)]="mensagem.descricao" ></ion-textarea>
+          <ion-textarea formControlName="descricao" class="textarea" ></ion-textarea>
         </ion-item>
         <button ion-button type="submit" block>Enviar</button>
         <button ion-button (click)="cancelar()" block>Cancelar</button>

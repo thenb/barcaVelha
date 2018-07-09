@@ -41,7 +41,7 @@ export class EnquetePage {
   criarEnquete(){
 
     if(!this.enquete.valid){
-      this.presentToast("Campo descrição e Data fim obrigatório");
+      this.presentToast("Campo 'Descrição' e 'Data e hora limite' obrigatório");
     } else if (this.verificarOpcoes()){
       this.presentToast("No minimo duas opções inseridas");
     }else{
