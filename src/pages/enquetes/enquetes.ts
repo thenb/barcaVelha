@@ -26,21 +26,33 @@ export class EnquetesPage {
     private toastCtrl: ToastController)  {      
   }
 
-  ionViewDidLoad() {
-    
+  ionViewDidLoad() {    
+    this.getAllEnquetes();
+  }
+
+  getAllEnquetes() {    
     let loader = this.loadingController.create({
       content: "Carregando"
     });  
     loader.present(); 
-    this.http.get(CONFIG.url_api+'getAllEnquetes')
-      // Call map on the response observable to get the parsed people object
-      .toPromise().then(
-        data => {
-          this.enquetes = data;
-          loader.dismiss();
-        }
-      );
+    
+    let id_usuario = window.localStorage.getItem('id_usuario');     
+    let params= {
+      id_usuario : id_usuario            
+    };
+    this.http.post(CONFIG.url_api+'getAllEnquetes', params, 
+    {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .toPromise().then(data => {
+      this.enquetes = data;
+      loader.dismiss();
+    }).catch(error => {
+      console.log(error.status);
+    });
   }
+
+
   votar(enquete: any) { 
     let id_usuario = window.localStorage.getItem('id_usuario'); 
     let params= {
@@ -56,13 +68,13 @@ export class EnquetesPage {
     .toPromise().then(data => {
       this.presentToast(data);
       console.log(data);
+      this.getAllEnquetes();
     }).catch(error => {
       console.log(error.status);
     });
   }
 
-  presentToast(data) {
-    
+  presentToast(data) {    
     let toast = this.toastCtrl.create({
       message: JSON.stringify(data),
       duration: 3000,
@@ -72,8 +84,7 @@ export class EnquetesPage {
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
     });
-  
+
     toast.present();
   }
-
 }

@@ -51,8 +51,7 @@ export class MyApp {
         })
         .toPromise().then(data => {          
           let token_usuario = JSON.stringify(data[0].token);     
-          let id_usuario = JSON.stringify(data[0].id);       
-          alert(id_usuario);
+          let id_usuario = JSON.stringify(data[0].id);
           window.localStorage.setItem('token_usuario', token_usuario);
           window.localStorage.setItem('id_usuario', id_usuario);
         }).catch(error => {
