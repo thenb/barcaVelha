@@ -37,7 +37,6 @@ export class NovaPage {
   }
   
   enviarMensagem(){
-<<<<<<< HEAD
 
 
     if(!this.mensagem.valid){
@@ -49,6 +48,7 @@ export class NovaPage {
       })
       .toPromise().then(data => {
         this.presentToast(data);
+        this.navCtrl.setRoot('MenuPage');
         console.log(data);
       }).catch(error => {
         console.log(error.status);
@@ -57,18 +57,6 @@ export class NovaPage {
 
 
 
-=======
-    this.http.post(CONFIG.url_api+'newMsg', this.mensagem, 
-    {
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .toPromise().then(data => {
-      this.presentToast(data);
-      this.navCtrl.setRoot('MenuPage');
-    }).catch(error => {
-      console.log(error.status);
-    });
->>>>>>> 33e6d555fe168ab909ab0eddd23eccd0e4c8a3bb
   }
 
 
