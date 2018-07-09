@@ -40,16 +40,24 @@ export class EnquetePage {
 
   criarEnquete(){
 
-    this.http.post(CONFIG.url_api+'newPoll', this.enquete, 
-    {
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .toPromise().then(data => {
-      this.presentToast(data);
-      console.log(data);
-    }).catch(error => {
-      console.log(error.status);
-    });
+    if(!this.enquete.valid){
+      this.presentToast("Campo descrição e Data fim obrigatório");
+    } else if (this.verificarOpcoes()){
+      this.presentToast("No minimo duas opções inseridas");
+    }else{
+      this.http.post(CONFIG.url_api+'newPoll', this.enquete, 
+      {
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .toPromise().then(data => {
+        this.presentToast(data);
+        console.log(data);
+      }).catch(error => {
+        console.log(error.status);
+      });
+    }
+
+
   }
 
   presentToast(data) {
