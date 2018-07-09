@@ -17,14 +17,14 @@ import { CONFIG } from '../../config/config_global';
 })
 export class EnquetePage {
 
+
   private enquete= {
     descricao: '',
-    data_criacao: Date,
     data_fim: '',
-    opcao_1: '',
-    opcao_2: '',
-    opcao_3: '',
-    opcao_4: ''
+    opcao_1: null,
+    opcao_2: null,
+    opcao_3: null,
+    opcao_4: null
 
   };
 
@@ -39,6 +39,12 @@ export class EnquetePage {
   }
 
   criarEnquete(){
+
+    enquetePost : {
+
+    }
+
+
     this.http.post(CONFIG.url_api+'newPoll', this.enquete, 
     {
       headers: { 'Content-Type': 'application/json' }
