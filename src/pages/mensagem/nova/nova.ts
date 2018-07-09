@@ -20,7 +20,6 @@ export class NovaPage {
   private mensagem= {
     on_fire : false,
     data_evento: '',
-    data_criacao: Date.now(),
     descricao: ''
   };
 
