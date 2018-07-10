@@ -18,7 +18,15 @@ import { Device } from '@ionic-native/device';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      monthNames: ['janeiro', 'fevereiro', 'março', 'abril', "maio", 'junho', 'julho', 'agosto',
+        'setembro', 'outubro', 'novembro', 'dezembro'],
+      monthShortNames: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set',
+        'out', 'nov', 'dez'],
+      dayNames: ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 
+        'quinta-feira', 'sexta-feira', 'sábado' ],
+      dayShortNames: ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab' ],
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
