@@ -18,6 +18,42 @@
     border-bottom: none;
 }
 
+.toolbar-background-md {
+    background-color: black !important,
+    
+}
+
+.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
+    color: white
+}
+
+.toolbar-title-md{
+    color: white
+}
+
+.tabs-md .tabbar{
+    background: black;
+}
+
+.tabs-md [aria-selected=true].tab-button .tab-button-icon{
+    color: rgba(250, 0, 0, 0.8)
+}
+
+.tabs-md .tab-button{
+    color: white
+}
+
+.tabs-md .tab-button-icon{
+    color: white
+}
+
+.tabs-md [aria-selected=true].tab-button{
+    color: rgba(250, 0, 0, 0.8)
+}
+
+.content-md{
+    background-color: rgba(212, 212, 212, 1)
+}
 
 //.toolbar-background {
 //    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtbr3VhPdOV2q6u2o3oRJoRNVBMrxENt0IQSEccaVjAj64MNRVAw')!important;
