@@ -106,4 +106,5 @@
     <allow-navigation href="http://192.168.1.103:8100" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <allow-navigation href="http://192.168.1.108:8100" />
+    <allow-navigation href="http://192.168.1.100:8100" />
 </widget>

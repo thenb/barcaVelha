@@ -17,22 +17,66 @@ import { CONFIG } from '../../config/config_global';
 export class MensagensPage {
 
   msgs: any;
+  curtindo: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, public loadingController: LoadingController) {
+  this.curtindo= false;
   }
 
   ionViewDidLoad() {
     let loader = this.loadingController.create({
       content: "Carregando"
-    });  
+    }); 
     loader.present();
-    this.http.get(CONFIG.url_api+'getAllMsgs')
-      // Call map on the response observable to get the parsed people object
-      .toPromise().then(
-        data => {
-          this.msgs = data;
-          loader.dismiss();
-        }
-      );
+    this.getAllMensagems()
+    loader.dismiss();
   }
+
+  curtir(mensagem: any) {  
+    if(mensagem.curtido){
+      mensagem.curtido = false;
+    }else{
+      mensagem.curtido = true;
+    }
+    let id_usuario = window.localStorage.getItem('id_usuario'); 
+    let params= {
+      id_usuario : id_usuario,
+      id_mensagem: mensagem.id,
+      curtido: mensagem.curtido        
+    };
+    let loader = this.loadingController.create({
+      content: "Carregando"
+    }); 
+    loader.present();
+    
+    this.http.post(CONFIG.url_api+'curtirMsg', params, 
+    {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .toPromise().then(data => {
+      loader.dismiss();
+      this.getAllMensagems()
+    }).catch(error => {
+      console.log(error.status);
+    });
+  }
+
+  getAllMensagems() {
+    let id_usuario = window.localStorage.getItem('id_usuario');     
+    let params= {
+      id_usuario : id_usuario            
+    };
+    this.http.post(CONFIG.url_api+'getAllMsgs', params, 
+    {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .toPromise().then(data => {
+      this.msgs = data;     
+    }).catch(error => {
+      console.log(error.status);
+    });
+  }
+
+
+
 }
