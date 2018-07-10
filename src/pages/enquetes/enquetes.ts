@@ -61,7 +61,10 @@ export class EnquetesPage {
       resposta: enquete.resposta        
     };
 
-    this.http.post(CONFIG.url_api+'replayPoll', params, 
+    if(enquete.resposta==null){
+      this.presentToast("Favor selecionar uma opção da enquete");
+    }else{
+      this.http.post(CONFIG.url_api+'replayPoll', params, 
     {
       headers: { 'Content-Type': 'application/json' }
     })
@@ -72,6 +75,7 @@ export class EnquetesPage {
     }).catch(error => {
       console.log(error.status);
     });
+    }  
   }
 
   presentToast(data) {    

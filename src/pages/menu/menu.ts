@@ -2,7 +2,8 @@ import { PageInterface } from './menu';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
-import { AlertController } from 'ionic-angular';
+import { AlertController, Platform } from 'ionic-angular';
+
 
 export interface PageInterface {
   title: string;
@@ -29,7 +30,11 @@ export class MenuPage {
     { title: 'Nova Enquete', pageName: 'EnquetePage', tabComponent: 'EnquetePage', index: 1, icon: 'calendar' }
   ]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, private alertCtrl: AlertController) {  }
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public auth: AuthService,
+    private alertCtrl: AlertController,
+    private platform: Platform) {  }
 
   openPage(page: PageInterface) {   
       this.nav.setRoot(page.pageName);
@@ -49,8 +54,8 @@ export class MenuPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'Efetuar Logout?',
-      message: 'Você deseja efetuar o logout?',
+      title: 'Deseja Sair?',
+      message: 'Você deseja sair do aplicativo?',
       buttons: [
         {
           text: 'Não',
@@ -60,7 +65,7 @@ export class MenuPage {
         {
           text: 'Sim',
           handler: () => {
-            this.doLogout();
+            this.platform.exitApp();
           }
         }
       ]
