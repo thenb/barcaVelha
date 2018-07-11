@@ -4,6 +4,12 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Mensagens</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only>
+          <ion-icon float-left *ngIf="true" ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
+          <ion-icon float-left *ngIf="false" ios="ios-close-circle" md="md-close-circle" color="dark" style="zoom:1.5;"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>  
 <ion-content>  
@@ -14,7 +20,7 @@
       <ion-icon float-right ios="ios-heart" md="md-heart" [class.onLike]="m.curtido" [class.onNoLike]="!m.curtido" color="light" style="zoom:3.0;" (click)="curtir(m)"></ion-icon>  
       <ion-card-title text-center  >{{m.descricao}}</ion-card-title>
       <ion-item style="padding-left: 0px" >
-          <ion-label>Data do Evento: </ion-label>
+          <ion-label color="dark">Data do Evento: </ion-label>
           <ion-datetime  type="text" [(ngModel)]="m.data_evento" displayFormat="DD/MM/YYYY - HH:mm" [disabled]="true"></ion-datetime> 
       </ion-item> 
       </ion-card-content>
