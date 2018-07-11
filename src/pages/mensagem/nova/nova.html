@@ -16,7 +16,7 @@
     <form [formGroup]="mensagem"  (ngSubmit)="enviarMensagem()">
         <ion-item rows="1">
           <ion-label>Data e hora</ion-label>
-          <ion-datetime formControlName="data_evento" type="text" displayFormat="DD/MM/YYYY - HH:mm"></ion-datetime>
+          <ion-datetime cancelText ="Cancelar" doneText="Ok" min="2018"formControlName="data_evento" type="text" displayFormat="DD/MMM/YYYY - HH:mm"></ion-datetime>
         </ion-item>
         <ion-item rows="1">
           <ion-label>On fire</ion-label>
