@@ -18,9 +18,17 @@ export class MensagensPage {
 
   msgs: any;
   curtindo: boolean;
+  private is_online : boolean;  
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, public loadingController: LoadingController) {
   this.curtindo= false;
+
+  let is_online_temp = window.localStorage.getItem('status_twitch');   
+  if(is_online_temp == null){
+    this.is_online = false;  
+  }else{
+    this.is_online = true;
+  }
   }
 
   ionViewDidLoad() {

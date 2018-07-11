@@ -5,32 +5,29 @@
     </button>
     <ion-title>Nova Mensagem</ion-title>
     <ion-buttons end>
-        <button ion-button icon-only>
-          <ion-icon float-left *ngIf="true" ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
-          <ion-icon float-left *ngIf="false" ios="ios-close-circle" md="md-close-circle" color="dark" style="zoom:1.5;"></ion-icon>
-        </button>
+      <button ion-button icon-only>        
+        <ion-icon float-left *ngIf="is_online" ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
+        <ion-icon float-left *ngIf="!is_online" ios="ios-close-circle" md="md-close-circle" color="danger" style="zoom:1.5;"></ion-icon>
+      </button>
       </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>  
-    <form [formGroup]="mensagem"  (ngSubmit)="enviarMensagem()">
-        <ion-item rows="1">
-          <ion-label>Data e hora</ion-label>
-          <ion-datetime cancelText ="Cancelar" doneText="Ok" min="2018"formControlName="data_evento" type="text" displayFormat="DD/MMM/YYYY - HH:mm"></ion-datetime>
-        </ion-item>
-        <ion-item rows="1">
-          <ion-label>On fire</ion-label>
-          <ion-checkbox formControlName="on_fire" name="onFire"></ion-checkbox>
-        </ion-item>
-        <ion-item class="textarea">
-          <ion-label>Mensagem</ion-label>
-          <ion-textarea formControlName="descricao" class="textarea" ></ion-textarea>
-        </ion-item>
-    </form>
+    <form [formGroup]="mensagem">
+      <ion-item class="textarea">         
+        <ion-textarea formControlName="descricao" class="textarea"  placeholder="Digite a Mensagem" [(ngModel)]="descricao"></ion-textarea>
+      </ion-item>
+      <ion-item rows="1">
+        <ion-label>Data e hora</ion-label>
+        <ion-datetime cancelText ="Cancelar" doneText="Ok" min="2018"formControlName="data_evento" type="text" displayFormat="DD/MMM/YYYY - HH:mm" [(ngModel)]="data"></ion-datetime>
+      </ion-item>
+      <ion-item rows="1">
+        <ion-label>On fire</ion-label>
+        <ion-checkbox formControlName="on_fire" name="onFire" [(ngModel)]="on_fire"></ion-checkbox>
+      </ion-item>
+    </form>    
 </ion-content>
-<ion-footer>
-  <ion-toolbar>
-    <button ion-button (click)="enviarMensagem()" block>Enviar</button>
-    <button ion-button (click)="cancelar()" block>Cancelar</button>
-  </ion-toolbar>
+<ion-footer>       
+    <button ion-button color="dark" style="height: 50px" (click)="enviarMensagem()" block>Enviar</button>    
+    <button ion-button color="dark" style="height: 50px" (click)="cancelar()" block>Cancelar</button>
 </ion-footer>

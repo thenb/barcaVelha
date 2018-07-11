@@ -5,9 +5,9 @@
     </button>
     <ion-title>Redes Sociais</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon float-left *ngIf="true" ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
-        <ion-icon float-left *ngIf="false" ios="ios-close-circle" md="md-close-circle" color="dark" style="zoom:1.5;"></ion-icon>
+      <button ion-button icon-only>        
+        <ion-icon float-left *ngIf="is_online" ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
+        <ion-icon float-left *ngIf="!is_online" ios="ios-close-circle" md="md-close-circle" color="danger" style="zoom:1.5;"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

@@ -34,6 +34,8 @@ export class RedesSociaisPage {
     fullscreen : 'yes',//Windows only    
 };
 
+private is_online : boolean;  
+
 
 
   constructor(public navCtrl: NavController,
@@ -41,6 +43,12 @@ export class RedesSociaisPage {
       private http: HttpClient,
        public loadingController: LoadingController,
        private theInAppBrowser: InAppBrowser) {
+        let is_online_temp = window.localStorage.getItem('status_twitch');   
+        if(is_online_temp == null){
+          this.is_online = false;  
+        }else{
+          this.is_online = true;
+        }
  }
 
  openWebpage(url : string) {  

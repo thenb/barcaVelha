@@ -58,6 +58,19 @@ export class MyApp {
           console.log(error.status);
         }); 
 
+        this.http.get(CONFIG.url_twitch_api,  
+        {
+          headers: { 'Content-Type': 'application/json', 'Client-Id': CONFIG.id_client_twitch }
+        })
+        .toPromise().then(data => {          
+          let status_twitch = data[0].stream; 
+          window.localStorage.setItem('status_twitch', status_twitch);  
+                 
+        }).catch(error => {
+          console.log(error.status);
+        }); 
+
+
       // Redirect back to app after authenticating
       (window as any).handleOpenURL = (url: string) => {
         Auth0Cordova.onRedirectUri(url);

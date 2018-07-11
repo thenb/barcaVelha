@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController,  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, DateTime,  } from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
 import { ToastController } from 'ionic-angular';
 import { CONFIG } from '../../../config/config_global';
@@ -20,6 +20,10 @@ import { CONTENT } from '../../../assets/content/content';
 export class NovaPage {
 
   private mensagem: FormGroup; 
+  private is_online : boolean;  
+  private descricao: string;
+  private data: DateTime;
+  private on_fire: boolean;
 
   constructor(public navCtrl: NavController,  public navParams: NavParams, 
     private http: HttpClient,  public loadingController: LoadingController,
@@ -30,19 +34,29 @@ export class NovaPage {
         data_evento: ['', Validators.required],
         descricao: ['', Validators.required]
       });
+
+      let is_online_temp = window.localStorage.getItem('status_twitch');   
+      if(is_online_temp == null){
+        this.is_online = false;  
+      }else{
+        this.is_online = true;
+      }
     }
 
   cancelar() {  
     this.navCtrl.setRoot('MenuPage');
   }
   
-  enviarMensagem(){
-
-
+  enviarMensagem(){    
     if(!this.mensagem.valid){
       this.presentToast(CONTENT.Mensagem.erroCampoObrigatorio);
-    }else{
-      this.http.post(CONFIG.url_api+'newMsg', this.mensagem, 
+    }else{ 
+      let params= {
+        on_fire : this.on_fire,
+        descricao: this.descricao,
+        data_evento: this.data            
+      };
+      this.http.post(CONFIG.url_api+'newMsg', params, 
       {
         headers: { 'Content-Type': 'application/json' }
       })
@@ -54,9 +68,6 @@ export class NovaPage {
         console.log(error.status);
       });
     }
-
-
-
   }
 
 

@@ -5,9 +5,9 @@
     </button>
     <ion-title>Nova Enquete</ion-title>
     <ion-buttons end>
-        <button ion-button icon-only>
-          <ion-icon float-left *ngIf="true" ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
-          <ion-icon float-left *ngIf="false" ios="ios-close-circle" md="md-close-circle" color="dark" style="zoom:1.5;"></ion-icon>
+        <button ion-button icon-only>        
+          <ion-icon float-left *ngIf="is_online" ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
+          <ion-icon float-left *ngIf="!is_online" ios="ios-close-circle" md="md-close-circle" color="danger" style="zoom:1.5;"></ion-icon>
         </button>
       </ion-buttons>
   </ion-navbar>
@@ -15,39 +15,37 @@
 <ion-content> 
   <form [formGroup]="enquete">
     <ion-item>
-      <ion-label stacked>Descrição da enquete</ion-label>
-      <ion-input formControlName="descricao"  required ></ion-input>
+      <ion-label stacked>Descrição</ion-label>
+      <ion-input formControlName="descricao" [(ngModel)]="descricao"  required ></ion-input>
     </ion-item>
 
     <ion-item rows="1">
       <ion-label>Data e hora limite</ion-label>
-      <ion-datetime cancelText ="Cancelar" doneText="Ok" min="2018"formControlName="data_fim" type="text" displayFormat="DD/MMM/YYYY - HH:mm"></ion-datetime>
+      <ion-datetime cancelText ="Cancelar" doneText="Ok" min="2018"formControlName="data_fim" type="text" displayFormat="DD/MMM/YYYY - HH:mm" [(ngModel)]="data_fim"></ion-datetime>
     </ion-item>
     
     <ion-item>
       <ion-label stacked>Opção 1</ion-label>
-      <ion-input formControlName="opcao_1"></ion-input>
+      <ion-input formControlName="opcao_1" [(ngModel)]="opcao_1"></ion-input>
     </ion-item>
       
     <ion-item>
       <ion-label stacked>Opção 2</ion-label>
-      <ion-input formControlName="opcao_2"></ion-input>
+      <ion-input formControlName="opcao_2" [(ngModel)]="opcao_2"></ion-input>
      </ion-item>
       
     <ion-item>
       <ion-label stacked>Opção 3</ion-label>
-      <ion-input formControlName="opcao_3"></ion-input>
+      <ion-input formControlName="opcao_3" [(ngModel)]="opcao_3"></ion-input>
     </ion-item>
       
     <ion-item>
       <ion-label stacked>Opção 4</ion-label>
-      <ion-input formControlName="opcao_4"></ion-input>
+      <ion-input formControlName="opcao_4" [(ngModel)]="opcao_4"></ion-input>
     </ion-item>
   </form>
 </ion-content>
 <ion-footer>
-  <ion-toolbar>
-    <button ion-button (click)="criarEnquete()" block>Enviar</button>
-    <button ion-button (click)="cancelar()" block>Cancelar</button>
-  </ion-toolbar>
+    <button ion-button color="dark" style="height: 50px" (click)="criarEnquete()" block>Enviar</button>
+    <button ion-button color="dark" style="height: 50px" (click)="cancelar()" block>Cancelar</button>  
 </ion-footer>
