@@ -9,6 +9,9 @@ import { MyApp } from './app.component';
 import {InAppBrowser } from '@ionic-native/in-app-browser'
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Device } from '@ionic-native/device';
+import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
+import { NativeAudio } from '@ionic-native/native-audio';
+
 
 
 @NgModule({
@@ -39,7 +42,9 @@ import { Device } from '@ionic-native/device';
     InAppBrowser,
     PhotoViewer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Device
+    Device,
+    SmartAudioProvider,
+    NativeAudio
   ]
 })
 export class AppModule {}
