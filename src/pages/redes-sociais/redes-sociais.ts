@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
 import { InAppBrowser, InAppBrowserOptions  } from '@ionic-native/in-app-browser';
+import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 
 /**
  * Generated class for the Tab2Page page.
@@ -42,7 +43,8 @@ private is_online : boolean;
      public navParams: NavParams,
       private http: HttpClient,
        public loadingController: LoadingController,
-       private theInAppBrowser: InAppBrowser) {
+       private theInAppBrowser: InAppBrowser,
+       private smartAudioProvider: SmartAudioProvider) {
         let is_online_temp = window.localStorage.getItem('status_twitch');   
         if(is_online_temp == null){
           this.is_online = false;  
@@ -55,6 +57,10 @@ private is_online : boolean;
   let target = "_self";
   this.theInAppBrowser.create(url,target,this.options);
  }
+
+private uivar(){
+  this.smartAudioProvider.play('howl');
+}
 
  
 }

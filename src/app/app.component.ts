@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Device } from '@ionic-native/device';
 import { HttpClient} from '@angular/common/http';
 import { CONFIG } from '../config/config_global';
+import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 
 // Import Auth0Cordova
 import Auth0Cordova from '@auth0/cordova';
@@ -22,7 +23,9 @@ export class MyApp {
       public statusBar: StatusBar,
       public splashScreen: SplashScreen,
       private device: Device,
-      private http: HttpClient,) {        
+      private http: HttpClient,
+      private smartAudioProvider: SmartAudioProvider
+    ) {        
     this.initializeApp();  
   }
 
@@ -75,6 +78,8 @@ export class MyApp {
       (window as any).handleOpenURL = (url: string) => {
         Auth0Cordova.onRedirectUri(url);
       }
+
+      this.smartAudioProvider.preload('howl', 'assets/audio/howl.mp3');
     });
   }
 }
