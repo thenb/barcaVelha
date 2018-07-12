@@ -37,7 +37,7 @@ export class MenuPage {
     private platform: Platform) {  }
 
   openPage(page: PageInterface) {   
-      this.nav.setRoot(page.pageName);
+    this.nav.setRoot(page.pageName);
   }
 
   isActive(page: PageInterface) {

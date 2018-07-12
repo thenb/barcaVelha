@@ -6,6 +6,7 @@ import { Device } from '@ionic-native/device';
 import { HttpClient} from '@angular/common/http';
 import { CONFIG } from '../config/config_global';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
+import { Firebase } from '@ionic-native/firebase';
 
 // Import Auth0Cordova
 import Auth0Cordova from '@auth0/cordova';
@@ -24,7 +25,8 @@ export class MyApp {
       public splashScreen: SplashScreen,
       private device: Device,
       private http: HttpClient,
-      private smartAudioProvider: SmartAudioProvider
+      private smartAudioProvider: SmartAudioProvider,
+      private firebase: Firebase
     ) {        
     this.initializeApp();  
   }
@@ -80,6 +82,14 @@ export class MyApp {
       }
 
       this.smartAudioProvider.preload('howl', 'assets/audio/howl.mp3');
-    });
+
+      this.firebase.getToken()
+      .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
+      .catch(error => console.error('Error getting token', error));
+    
+      this.firebase.onTokenRefresh()
+        .subscribe((token: string) => console.log(`Got a new token ${token}`));
+
+      });
   }
 }
