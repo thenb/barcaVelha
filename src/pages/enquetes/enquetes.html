@@ -5,14 +5,17 @@
     </button>
     <ion-title>Enquetes</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only>        
-        <ion-icon float-left *ngIf="is_online" ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
-        <ion-icon float-left *ngIf="!is_online" ios="ios-close-circle" md="md-close-circle" color="danger" style="zoom:1.5;"></ion-icon>
+      <button ion-button icon-only *ngIf="is_online" (click)="openWebpage('http://www.twitch.tv/gratis150ml')">        
+        <ion-icon float-left ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
       </button>
-      </ion-buttons>
+      <button ion-button icon-only *ngIf="!is_online">        
+        <ion-icon float-left  ios="ios-close-circle" md="md-close-circle" color="danger" style="zoom:1.5;"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>  
 <ion-content>  
+    
     <ion-card *ngFor="let m of enquetes">
         <img src="assets/imgs/rede_sociais/facebook.jpg" class="img-responsive " style=" width: 100% !important;height: auto !important;min-height: 150px;max-height: 170px;"/>
     <ion-card-content>

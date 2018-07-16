@@ -12,6 +12,7 @@ import { Device } from '@ionic-native/device';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Firebase } from '@ionic-native/firebase';
+import { UtilsProvider } from '../providers/utils/utils';
 
 
 
@@ -47,7 +48,8 @@ import { Firebase } from '@ionic-native/firebase';
     Device,
     SmartAudioProvider,
     NativeAudio,
-    Firebase
+    Firebase,
+    UtilsProvider
   ]
 })
 export class AppModule {}

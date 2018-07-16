@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
 import { CONFIG } from '../../config/config_global';
-
+import { UtilsProvider } from '../../providers/utils/utils'
 /**
  * Generated class for the News page.
  *
@@ -20,7 +20,7 @@ export class MensagensPage {
   curtindo: boolean;
   private is_online : boolean;  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, public loadingController: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, public loadingController: LoadingController, private utilsProvider: UtilsProvider) {
   this.curtindo= false;
 
   let is_online_temp = window.localStorage.getItem('status_twitch');   
@@ -85,6 +85,9 @@ export class MensagensPage {
     });
   }
 
+  openWebpage(url : string) {  
+    this.utilsProvider.openWebpage(url);
+   }
 
 
 }

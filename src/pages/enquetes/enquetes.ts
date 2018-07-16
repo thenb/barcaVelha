@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { HttpClient} from '@angular/common/http';
 import { CONFIG } from '../../config/config_global';
 import { ToastController } from 'ionic-angular';
+import { UtilsProvider } from '../../providers/utils/utils'
 
 /**
  * Generated class for the News page.
@@ -24,7 +25,8 @@ export class EnquetesPage {
     public navParams: NavParams,
     private http: HttpClient,
     public loadingController: LoadingController,
-    private toastCtrl: ToastController)  { 
+    private toastCtrl: ToastController, 
+    private utilsProvider: UtilsProvider)  { 
       
       let is_online_temp = window.localStorage.getItem('status_twitch');   
       if(is_online_temp == null){
@@ -99,4 +101,8 @@ export class EnquetesPage {
 
     toast.present();
   }
+
+  openWebpage(url : string) {  
+    this.utilsProvider.openWebpage(url);
+   }
 }

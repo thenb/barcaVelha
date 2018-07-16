@@ -5,6 +5,7 @@ import { ToastController } from 'ionic-angular';
 import { CONFIG } from '../../../config/config_global';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CONTENT } from '../../../assets/content/content';
+import { UtilsProvider } from '../../../providers/utils/utils';
 
 /**
  * Generated class for the Tab2Page page.
@@ -27,7 +28,8 @@ export class NovaPage {
 
   constructor(public navCtrl: NavController,  public navParams: NavParams, 
     private http: HttpClient,  public loadingController: LoadingController,
-    private toastCtrl: ToastController,  private formBuilder: FormBuilder) 
+    private toastCtrl: ToastController,  private formBuilder: FormBuilder,
+     private utilsProvider: UtilsProvider) 
     {
       this.mensagem = this.formBuilder.group({
         on_fire : [false],
@@ -86,5 +88,8 @@ export class NovaPage {
     toast.present();
   }
 
+  openWebpage(url : string) {  
+    this.utilsProvider.openWebpage(url);
+   }
 
 }

@@ -65,9 +65,10 @@ export class MyApp {
 
         this.http.get(CONFIG.url_twitch_api,  
         {
-          headers: { 'Content-Type': 'application/json', 'Client-Id': CONFIG.id_client_twitch }
+          headers: { 'Content-Type': 'application/json', 'Accept' : 'application/vnd.twitchtv.v5+json', 'Client-ID': CONFIG.id_client_twitch }
         })
         .toPromise().then(data => {          
+          console.log("AAAAAAAAAAAAAAAAAA: " + data[0]);
           let status_twitch = data[0].stream; 
           window.localStorage.setItem('status_twitch', status_twitch);  
                  

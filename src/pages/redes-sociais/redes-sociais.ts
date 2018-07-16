@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
-import { InAppBrowser, InAppBrowserOptions  } from '@ionic-native/in-app-browser';
 import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
+import { UtilsProvider } from '../../providers/utils/utils';
 
 /**
  * Generated class for the Tab2Page page.
@@ -15,25 +15,9 @@ import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
   selector: 'page-redes-sociais',
   templateUrl: 'redes-sociais.html',
 })
+
 export class RedesSociaisPage { 
 
-  options : InAppBrowserOptions  = {
-    location : 'yes',//Or 'no' 
-    hidden : 'no', //Or  'yes'
-    clearcache : 'yes',
-    clearsessioncache : 'yes',
-    zoom : 'yes',//Android only ,shows browser zoom controls 
-    hardwareback : 'yes',
-    mediaPlaybackRequiresUserAction : 'no',
-    shouldPauseOnSuspend : 'no', //Android only 
-    closebuttoncaption : 'Close', //iOS only
-    disallowoverscroll : 'no', //iOS only 
-    toolbar : 'yes', //iOS only 
-    enableViewportScale : 'no', //iOS only 
-    allowInlineMediaPlayback : 'no',//iOS only 
-    presentationstyle : 'pagesheet',//iOS only 
-    fullscreen : 'yes',//Windows only    
-};
 
 private is_online : boolean;  
 
@@ -43,7 +27,7 @@ private is_online : boolean;
      public navParams: NavParams,
       private http: HttpClient,
        public loadingController: LoadingController,
-       private theInAppBrowser: InAppBrowser,
+       private utilsProvider: UtilsProvider,
        private smartAudioProvider: SmartAudioProvider) {
         let is_online_temp = window.localStorage.getItem('status_twitch');   
         if(is_online_temp == null){
@@ -52,10 +36,9 @@ private is_online : boolean;
           this.is_online = true;
         }
  }
-
+ 
  openWebpage(url : string) {  
-  let target = "_self";
-  this.theInAppBrowser.create(url,target,this.options);
+  this.utilsProvider.openWebpage(url);
  }
 
 private uivar(){
