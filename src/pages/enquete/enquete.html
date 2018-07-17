@@ -3,15 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Nova Enquete</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only *ngIf="is_online" (click)="openWebpage('http://www.twitch.tv/gratis150ml')">        
-        <ion-icon float-left ios="ios-checkmark-circle" md="md-checkmark-circle" color="secondary" style="zoom:1.5;"></ion-icon>
-      </button>
-      <button ion-button icon-only *ngIf="!is_online">        
-        <ion-icon float-left  ios="ios-close-circle" md="md-close-circle" color="danger" style="zoom:1.5;"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-title>Nova Enquete</ion-title>    
   </ion-navbar>
 </ion-header>
 <ion-content> 
@@ -23,7 +15,7 @@
 
     <ion-item rows="1">
       <ion-label>Data e hora limite</ion-label>
-      <ion-datetime cancelText ="Cancelar" doneText="Ok" min="2018"formControlName="data_fim" type="text" displayFormat="DD/MMM/YYYY - HH:mm" [(ngModel)]="data_fim"></ion-datetime>
+      <ion-datetime cancelText ="Cancelar" doneText="Ok" min="2018"formControlName="data_fim" type="text" displayFormat="DD/MMM/YYYY - HH:mm" [(ngModel)]="data_fim" minuteValues="0,15,30,45"></ion-datetime>
     </ion-item>
     
     <ion-item>

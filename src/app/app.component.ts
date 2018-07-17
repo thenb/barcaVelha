@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Device } from '@ionic-native/device';
@@ -26,7 +26,8 @@ export class MyApp {
       private device: Device,
       private http: HttpClient,
       private smartAudioProvider: SmartAudioProvider,
-      private firebase: Firebase
+      private firebase: Firebase,
+      public loadingController: LoadingController
     ) {        
     this.initializeApp();  
   }
@@ -50,6 +51,11 @@ export class MyApp {
         token : this.device.uuid        
       };
 
+      let loader = this.loadingController.create({
+        content: "Carregando"
+      }); 
+      
+      loader.present(); 
       this.http.post(CONFIG.url_api+'getId', params, 
         {
           headers: { 'Content-Type': 'application/json' }
@@ -58,31 +64,16 @@ export class MyApp {
           let token_usuario = JSON.stringify(data[0].token);     
           let id_usuario = JSON.stringify(data[0].id);
           window.localStorage.setItem('token_usuario', token_usuario);
-          window.localStorage.setItem('id_usuario', id_usuario);
+          window.localStorage.setItem('id_usuario', id_usuario); 
+          loader.dismiss();         
         }).catch(error => {
           console.log(error.status);
         }); 
-
-        this.http.get(CONFIG.url_twitch_api,  
-        {
-          headers: { 'Content-Type': 'application/json', 'Accept' : 'application/vnd.twitchtv.v5+json', 'Client-ID': CONFIG.id_client_twitch }
-        })
-        .toPromise().then(data => {          
-          console.log("AAAAAAAAAAAAAAAAAA: " + data[0]);
-          let status_twitch = data[0].stream; 
-          window.localStorage.setItem('status_twitch', status_twitch);  
-                 
-        }).catch(error => {
-          console.log(error.status);
-        }); 
-
 
       // Redirect back to app after authenticating
       (window as any).handleOpenURL = (url: string) => {
         Auth0Cordova.onRedirectUri(url);
       }
-
-      this.smartAudioProvider.preload('howl', 'assets/audio/howl.mp3');
 
       this.firebase.getToken()
       .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
@@ -91,6 +82,8 @@ export class MyApp {
       this.firebase.onTokenRefresh()
         .subscribe((token: string) => console.log(`Got a new token ${token}`));
 
-      });
+
+     
+      });      
   }
 }

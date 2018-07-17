@@ -27,13 +27,13 @@ export class EnquetesPage {
     public loadingController: LoadingController,
     private toastCtrl: ToastController, 
     private utilsProvider: UtilsProvider)  { 
-      
-      let is_online_temp = window.localStorage.getItem('status_twitch');   
-      if(is_online_temp == null){
-        this.is_online = false;  
-      }else{
-        this.is_online = true;
-      }
+   
+      let is_online_temp = window.localStorage.getItem('status_twitch');
+        if(is_online_temp==='null'){
+          this.is_online = false;  
+        }else{
+          this.is_online = true;
+        }
   }
 
   ionViewDidLoad() {    

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { HttpClient} from '@angular/common/http';
 import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 import { UtilsProvider } from '../../providers/utils/utils';
+import { CONFIG } from '../../config/config_global';
 
 /**
  * Generated class for the Tab2Page page.
@@ -19,9 +20,7 @@ import { UtilsProvider } from '../../providers/utils/utils';
 export class RedesSociaisPage { 
 
 
-private is_online : boolean;  
-
-
+private is_online : boolean; 
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -29,21 +28,35 @@ private is_online : boolean;
        public loadingController: LoadingController,
        private utilsProvider: UtilsProvider,
        private smartAudioProvider: SmartAudioProvider) {
-        let is_online_temp = window.localStorage.getItem('status_twitch');   
-        if(is_online_temp == null){
-          this.is_online = false;  
-        }else{
-          this.is_online = true;
-        }
+
+        this.smartAudioProvider.preload('howl', 'assets/audio/howl.mp3'); 
+        let loader = this.loadingController.create({
+          content: "Carregando"
+        }); 
+        
+        loader.present(); 
+        this.http.get(CONFIG.url_twitch_api,  
+          {
+            headers: { 'Content-Type': 'application/json', 'Client-Id': CONFIG.id_client_twitch }
+          })
+          .toPromise().then(data => {
+            var streamon = data["stream"];              
+            window.localStorage.setItem('status_twitch', streamon);         
+            let is_online_temp = window.localStorage.getItem('status_twitch');    
+            if(is_online_temp==='null'){
+              this.is_online = false;  
+            }else{              
+              this.is_online = true; 
+              this.smartAudioProvider.play('howl');     
+            }
+            loader.dismiss();     
+          }).catch(error => {
+            console.log(error.status);
+          });       
  }
  
  openWebpage(url : string) {  
   this.utilsProvider.openWebpage(url);
  }
-
-private uivar(){
-  this.smartAudioProvider.play('howl');
-}
-
  
 }

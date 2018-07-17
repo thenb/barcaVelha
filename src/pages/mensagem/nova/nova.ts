@@ -35,14 +35,7 @@ export class NovaPage {
         on_fire : [false],
         data_evento: ['', Validators.required],
         descricao: ['', Validators.required]
-      });
-
-      let is_online_temp = window.localStorage.getItem('status_twitch');   
-      if(is_online_temp == null){
-        this.is_online = false;  
-      }else{
-        this.is_online = true;
-      }
+      });     
     }
 
   cancelar() {  
